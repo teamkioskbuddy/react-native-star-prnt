@@ -106,7 +106,13 @@ RCT_REMAP_METHOD(checkStatus, portName:(NSString *)portName
             [NSThread sleepForTimeInterval:0.2];
         }
         
-        [port getParsedStatus:&status :2];
+        @try {
+            [port getParsedStatus:&status :2];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"Get parsed status exception");
+        }
+
         NSDictionary *firmwareInformation = [[NSMutableDictionary alloc] init];
         @try {
             firmwareInformation = [port getFirmwareInformation];

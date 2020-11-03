@@ -220,6 +220,7 @@ public class RNStarPrntModule extends ReactContextBaseJavaModule {
     }).start();
   }
 
+  // TODO: Modify this to take a timeout value for getting the port and a timeout value for writing to the port
   @ReactMethod
   public void print(final String portName, String emulation, final ReadableArray printCommands, final Promise promise) {
 

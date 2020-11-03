@@ -33,7 +33,8 @@ typedef void (^RequestStatusCompletionHandler)(BOOL result, NSString *title, NSS
 + (BOOL)sendCommands:(NSData *)commands
             portName:(NSString *)portName
         portSettings:(NSString *)portSettings
-             timeout:(NSInteger)timeout
+      getPortTimeout:(NSInteger)getPortTimeout
+    writePortTimeout:(NSInteger)writePortTimeout
    completionHandler:(SendCompletionHandler)completionHandler;
 
 + (BOOL)sendCommandsDoNotCheckCondition:(NSData *)commands

@@ -213,6 +213,8 @@ RCT_REMAP_METHOD(disconnect,
 RCT_REMAP_METHOD(print, portName:(NSString *)portName
                  emulation:(NSString *)emulation
                  printCommands:(NSArray *) printCommands
+                 getPortTimeout:(NSInteger)getPortTimeout
+                 writePortTimeout:(NSInteger)writePortTimeout
                  sendPrintCommandWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
@@ -236,7 +238,8 @@ RCT_REMAP_METHOD(print, portName:(NSString *)portName
     [Communication sendCommands:[builder.commands copy]
                        portName:portName
                    portSettings:portSettings
-                        timeout:10000
+                 getPortTimeout:getPortTimeout
+               writePortTimeout:writePortTimeout
               completionHandler:^(BOOL result, NSString *title, NSString *message) {
                   if(result == YES){
                       NSMutableDictionary *resultMessage = [[NSMutableDictionary alloc] init];

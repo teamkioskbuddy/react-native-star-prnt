@@ -238,10 +238,12 @@ declare class StarPRNT {
      * Sends an Array of commands to the command buffer using the Android ICommandBuilderInterface or iOS ISCBBuilderInterface
      * @param {string} emulation  StarPrinter Emulation type: "StarPRNT", "StarPRNTL", "StarLine", "StarGraphic", "EscPos", "EscPosMobile", "StarDotImpact"
      * @param {CommandsArray} commandsArray  each command in the array should be an instance of the PrintCommand object. Example [{append:"text"}, {"openCashDrawer: 1"}]
-     * * @param {string} port Optional. printer name i.e BT:StarMicronics. If not set, a printer connected via StarIOExtManager using the connect() function will be used.
+     * @param {number} getPortTimeout A number, in milliseconds, that tells the StarPRNT SDK how long to wait while getting a port
+     * @param {number} writePortTimeout A number, in milliseconds, that tells the StarPRNT SDK how long to wait while writing a port
+     * @param {string} port Optional. printer name i.e BT:StarMicronics. If not set, a printer connected via StarIOExtManager using the connect() function will be used.
      * @return {Promise<any>} Success! if printed correctly or error message string returned by the SDK.
      */
-    static print: (emulation: string, commandsArray: CommandsArray, port?: string) => Promise<any>;
+    static print: (emulation: string, commandsArray: CommandsArray, getPortTimeout: number, writePortTimeout: number, port?: string) => Promise<any>;
 }
 
 export interface Printer {

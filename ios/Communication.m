@@ -257,22 +257,23 @@
 + (BOOL)sendCommands:(NSData *)commands
             portName:(NSString *)portName
         portSettings:(NSString *)portSettings
-             timeout:(NSInteger)timeout
+      getPortTimeout:(NSInteger)getPortTimeout
+    writePortTimeout:(NSInteger)writePortTimeout
    completionHandler:(SendCompletionHandler)completionHandler {
   BOOL result = NO;
   
   NSString *title   = @"";
   NSString *message = @"";
   
-  if (timeout > UINT32_MAX) {
-    timeout = UINT32_MAX;
+  if (getPortTimeout > UINT32_MAX) {
+    getPortTimeout = UINT32_MAX;
   }
   
   SMPort *port = nil;
   
   @try {
     while (YES) {
-      port = [SMPort getPort:portName :portSettings :(uint32_t) timeout];
+      port = [SMPort getPort:portName :portSettings :(uint32_t) getPortTimeout];
       
       if (port == nil) {
         title = @"Fail to Open Port";
@@ -306,7 +307,7 @@
         
         total += written;
         
-        if ([[NSDate date] timeIntervalSinceDate:startDate] >= 30.0) {     // 30000mS!!!
+        if ([[NSDate date] timeIntervalSinceDate:startDate] >= (writePortTimeout / 1000)) {
           title   = @"Printer Error";
           message = @"Write port timed out";
           break;
@@ -317,7 +318,7 @@
         break;
       }
       
-      port.endCheckedBlockTimeoutMillis = 30000;     // 30000mS!!!
+      port.endCheckedBlockTimeoutMillis = (int)writePortTimeout;
       
       [port endCheckedBlock:&printerStatus :2];
       

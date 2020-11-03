@@ -393,6 +393,8 @@ RCT_REMAP_METHOD(print, portName:(NSString *)portName
         portSettings = [@"escpos" stringByAppendingString:portSettings];
     }else if([emulation isEqualToString:@"StarPRNT"] || [emulation isEqualToString:@"StarPRNTL"]){
         portSettings = [@"Portable;l" stringByAppendingString:portSettings];
+    }else {
+        portSettings = [@";l" stringByAppendingString:portSettings]; // This means the StarPRNT SDK will default to the timeout defined in the API call (e.g. getPort) - See StarPRNT docs
     }
     return portSettings;
 }

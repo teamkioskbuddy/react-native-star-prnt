@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 
   s.dependency "React"
   s.frameworks = 'CoreBluetooth', 'ExternalAccessory'
-  s.vendored_frameworks = 'ios/Frameworks/StarIO.framework', 'ios/Frameworks/StarIO_Extension.framework'
+  s.vendored_frameworks = 'ios/Frameworks/StarIO.xcframework', 'ios/Frameworks/StarIO_Extension.xcframework'
 
   #s.dependency "others"
 

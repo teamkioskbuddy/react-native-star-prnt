@@ -96,7 +96,7 @@ RCT_REMAP_METHOD(checkStatus, portName:(NSString *)portName
     NSString *portSettings = [self getPortSettingsOption:emulation];
     @try {
         
-        port = [SMPort getPort:portName :portSettings :10000];     // 10000mS!!!
+        port = [SMPort getPort:portName :portSettings :15000];     // 15000mS!!!
         
         // Sleep to avoid a problem which sometimes cannot communicate with Bluetooth.
         
@@ -148,12 +148,12 @@ RCT_REMAP_METHOD(connect, portName:(NSString *)portName
                 _printerManager = [[StarIoExtManager alloc] initWithType:StarIoExtManagerTypeWithBarcodeReader
                                                                 portName:portName
                                                             portSettings:portSettings
-                                                         ioTimeoutMillis:10000];
+                                                         ioTimeoutMillis:15000];
             } else {
                 _printerManager = [[StarIoExtManager alloc] initWithType:StarIoExtManagerTypeStandard
                                                                 portName:portName
                                                             portSettings:portSettings
-                                                         ioTimeoutMillis:10000];
+                                                         ioTimeoutMillis:15000];
             }
             _printerManager.delegate = self;
         }
@@ -236,7 +236,7 @@ RCT_REMAP_METHOD(print, portName:(NSString *)portName
     [Communication sendCommands:[builder.commands copy]
                        portName:portName
                    portSettings:portSettings
-                        timeout:10000
+                        timeout:15000
               completionHandler:^(BOOL result, NSString *title, NSString *message) {
                   if(result == YES){
                       NSMutableDictionary *resultMessage = [[NSMutableDictionary alloc] init];

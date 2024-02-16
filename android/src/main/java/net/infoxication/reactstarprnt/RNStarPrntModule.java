@@ -585,11 +585,12 @@ public class RNStarPrntModule extends ReactContextBaseJavaModule {
                 }
             } else if (command.hasKey("appendBitmapText")){
                 int fontSize = (command.hasKey("fontSize")) ? command.getInt("fontSize") : 25;
+                String fontPath = (command.hasKey("font")) ? command.getString("font") : null;
                 boolean diffusion = (command.hasKey("diffusion")) ? command.getBoolean("diffusion") : true;
                 int width = (command.hasKey("width")) ? command.getInt("width") : 576;
                 boolean bothScale = (command.hasKey("bothScale")) ? command.getBoolean("bothScale") : true;
                 String text = command.getString("appendBitmapText");
-                Typeface typeface = Typeface.create(Typeface.MONOSPACE, Typeface.NORMAL);
+                Typeface typeface = fontPath != null ? Typeface.createFromAsset(context.getAssets(), fontPath) : Typeface.create(Typeface.MONOSPACE, Typeface.NORMAL);
                 Bitmap bitmap = createBitmapFromText(text, fontSize, width, typeface);
                 ICommandBuilder.BitmapConverterRotation rotation = (command.hasKey("rotation")) ? getConverterRotation(command.getString("rotation")) : getConverterRotation("Normal");
                 if(command.hasKey("absolutePosition")){
